@@ -2,51 +2,77 @@
 <odoo>
     <template id="custom_delivery_report" inherit_id="stock.report_delivery_document">
 
-
         <xpath expr="//div[hasclass('page')]" position="inside">
 
-            <!-- Separator -->
-            <div style="border-top:1px solid #000; margin-top:8px; margin-bottom:12px;"/>
+            <div style="padding-top:6px; border-top:1px solid #dee2e6;">
 
-            <!-- Balance to pay (Due Amount) -->
-            <div class="row mb8">
-                <div class="col-12 text-right">
-                    <strong>Balance to pay:</strong>
-                    <span t-field="o.due_amount"
-                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                </div>
-            </div>
+                <!-- Balance | Vehicle -->
+                <div class="row" style="margin-bottom:6px;">
 
-            <!-- Driver & Vehicle Info -->
-            <div class="row mt16 mb16">
-                <div class="col-6">
-                    <strong>Driver:</strong>
-                    <span t-esc="o.driver.name or ''"/>
-                </div>
-                <div class="col-6">
-                    <strong>Vehicle:</strong>
-                    <span t-esc="o.vehicle.name or ''"/>
-                </div>
-            </div>
+                    <div class="col-6">
+                        <strong>Balance to pay:</strong>
+                        <span t-field="o.due_amount"
+                              t-options='{"widget":"monetary","display_currency":o.currency_id}'
+                              style="font-weight:700; color:#dc3545; margin-left:4px;"/>
+                    </div>
 
-            <!-- Received By & Date -->
-            <div class="row mb16">
-                <div class="col-6">
-                    <strong>Received by:</strong>
-                    <div style="margin-top:8px; height:30px; border-bottom:1px solid #000;"/>
-                </div>
-                <div class="col-6 text-right">
-                    <strong>Date:</strong>
-                    <span t-field="o.scheduled_date"/>
-                </div>
-            </div>
+                    <div class="col-6">
+                        <strong>Vehicle:</strong>
+                        <t t-if="o.vehicle">
+                            <span t-field="o.vehicle.name" style="margin-left:4px;"/>
+                        </t>
+                        <t t-else="">
+                            <span style="color:#adb5bd; margin-left:4px;">–</span>
+                        </t>
+                    </div>
 
-            <!-- Signature Section -->
-            <div class="row mt32">
-                <div class="col-6">
-                    <strong>Driver Signature</strong>
-                    <div style="margin-top:8px; height:80px; border:1px solid #000;"/>
                 </div>
+
+                <!-- Driver | Signature -->
+                <div class="row" style="margin-bottom:8px;">
+
+                    <div class="col-6">
+                        <strong>Driver:</strong>
+                        <t t-if="o.driver">
+                            <span t-field="o.driver.name" style="margin-left:4px;"/>
+                        </t>
+                        <t t-else="">
+                            <span style="color:#adb5bd; margin-left:4px;">–</span>
+                        </t>
+                    </div>
+
+                    <div class="col-6">
+                        <strong>Driver Signature</strong>
+                        <div style="height:22px; border-bottom:1px solid #999;"></div>
+                    </div>
+
+                </div>
+
+                <!-- Receiver -->
+                <div class="row" style="margin-bottom:6px;">
+                    <div class="col-6">
+                        <strong>Received By</strong>
+                        <div style="height:22px; border-bottom:1px dashed #999;"></div>
+                    </div>
+
+                    <div class="col-6">
+                        <strong>ID No</strong>
+                        <div style="height:22px; border-bottom:1px dashed #999;"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Signed</strong>
+                        <div style="height:22px; border-bottom:1px dashed #999;"></div>
+                    </div>
+
+                    <div class="col-6">
+                        <strong>Date</strong>
+                        <div style="height:22px; border-bottom:1px dashed #999;"></div>
+                    </div>
+                </div>
+
             </div>
 
         </xpath>
