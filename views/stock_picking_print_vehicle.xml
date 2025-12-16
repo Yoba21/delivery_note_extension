@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_picking_form_inherit_driver_vehicle" model="ir.ui.view">
+        <field name="name">stock.picking.form.driver.vehicle</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Insert Driver & Vehicle after Scheduled Date row -->
+            <xpath expr="//field[@name='scheduled_date']/ancestor::div[@class='o_row']" position="after">
+
+                <label for="driver"/>
+                <div class="o_row">
+                    <field name="driver"
+                           readonly="state in ['cancel', 'done']"/>
+                </div>
+
+                <label for="vehicle"/>
+                <div class="o_row">
+                    <field name="vehicle"
+                           readonly="state in ['cancel', 'done']"/>
+                </div>
+
+
+                <label for="due_amount"/>
+                <div class="o_row">
+                    <field name="due_amount"
+                           widget="monetary"
+                           options="{'currency_field': 'currency_id'}"
+                           readonly="1"/>
+
+                </div>
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
